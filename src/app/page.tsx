@@ -10,7 +10,7 @@ export default function Home() {
     <main>
       <Hero imageSrc="/hero-bg.png" />
       <Ecosystem />
-      <CTA imageSrc="/cta-image.png" />
+      <CTA imageSrc="/abdallah-pro.png" />
       <Trust />
       <Connect mapSrc="/map.png" />
     </main>
