@@ -1,4 +1,3 @@
-import React from 'react';
 import PageHeader from '@/components/PageHeader';
 import Image from 'next/image';
 import { Calendar, User, ArrowRight } from 'lucide-react';
@@ -37,8 +36,8 @@ const blogPosts = [
 export default function BlogPage() {
   return (
     <main className="bg-bg-dark min-h-screen">
-      <PageHeader 
-        title="Actualités &" 
+      <PageHeader
+        title="Actualités &"
         gradientTitle="Conseils"
         subtitle="Restez informé des dernières tendances du e-commerce et de la logistique aux Comores."
       />
@@ -47,8 +46,8 @@ export default function BlogPage() {
         <div className="container mx-auto px-4 md:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {blogPosts.map((post) => (
-              <article 
-                key={post.id} 
+              <article
+                key={post.id}
                 className="glass-panel rounded-[2.5rem] overflow-hidden border border-white/10 group hover:border-primary/50 transition-all duration-500 flex flex-col h-full"
               >
                 {/* Post Image */}
@@ -82,17 +81,17 @@ export default function BlogPage() {
                   <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-primary transition-colors leading-tight">
                     {post.title}
                   </h3>
-                  
+
                   <p className="text-text-muted text-sm leading-relaxed mb-8 flex-grow">
                     {post.excerpt}
                   </p>
-                  
+
                   <div className="pt-6 border-t border-white/5">
-                    <Link 
+                    <Link
                       href={`/blog/${post.id}`}
                       className="inline-flex items-center gap-2 text-primary font-bold group/link"
                     >
-                      Lire la suite 
+                      Lire la suite
                       <ArrowRight size={18} className="group-hover/link:translate-x-1 transition-transform" />
                     </Link>
                   </div>
@@ -109,9 +108,9 @@ export default function BlogPage() {
                 Inscrivez-vous à notre newsletter pour recevoir nos derniers conseils et actualités directement dans votre boîte mail.
               </p>
               <form className="flex flex-col md:flex-row gap-4 max-w-lg mx-auto">
-                <input 
-                  type="email" 
-                  placeholder="Votre adresse email" 
+                <input
+                  type="email"
+                  placeholder="Votre adresse email"
                   className="flex-grow bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-primary transition-all"
                 />
                 <button className="btn btn-primary px-10 py-4 whitespace-nowrap">
