@@ -3,16 +3,16 @@ import { Globe, Mail } from 'lucide-react';
 
 const teamMembers = [
   {
-    name: "Abdallah",
-    role: "Fondateur & PDG",
-    image: "/abdallah-pro.png",
-    description: "Visionnaire et leader, Abdallah pilote la stratégie de croissance d'Aylan Group avec une passion pour l'innovation aux Comores."
+    name: "Bousri",
+    role: "PDG du groupe",
+    image: "/bousri-pro.png",
+    description: "Visionnaire et leader, Bousri pilote la stratégie de croissance d'Aylan Group avec une passion pour l'innovation aux Comores."
   },
   {
-    name: "Amina",
-    role: "Directrice des Opérations",
-    image: "/team-1.png",
-    description: "Experte en logistique internationale, Amina s'assure que chaque colis arrive à destination en toute sécurité et dans les délais impartis."
+    name: "Abdallah",
+    role: "Directeur des Opérations",
+    image: "/abdallah-pro.png",
+    description: "Expert en logistique internationale, Abdallah s'assure que chaque colis arrive à destination en toute sécurité et dans les délais impartis."
   },
   {
     name: "Karim",
