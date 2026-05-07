@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Menu, X, ChevronRight } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
@@ -40,13 +41,15 @@ export default function Navbar() {
           <div className="px-4 md:px-6 flex items-center justify-between">
             {/* Logo */}
             <div className="flex-shrink-0 flex items-center gap-2">
-              <Link href="/" className="flex items-center gap-3 group" onClick={() => setIsOpen(false)}>
-                <div className="w-9 h-9 rounded-full bg-gradient-to-br from-[#3A94F5] to-[#225CA4] flex items-center justify-center text-white font-bold shadow-[0_0_15px_rgba(58,148,245,0.4)] group-hover:scale-105 transition-transform border border-white/20">
-                  A
-                </div>
-                <span className="text-xl font-extrabold text-white tracking-tight">
-                  Aylan <span className="text-gradient-gold">Group</span>
-                </span>
+              <Link href="/" className="flex items-center group" onClick={() => setIsOpen(false)}>
+                <Image 
+                  src="/logo.png" 
+                  alt="Aylan Group Logo" 
+                  width={150} 
+                  height={50} 
+                  className="h-10 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                  priority
+                />
               </Link>
             </div>
 
@@ -68,9 +71,9 @@ export default function Navbar() {
               <Link href="/espace-client" className="hidden sm:inline-flex items-center justify-center bg-white/5 hover:bg-white/10 text-white border border-white/10 px-4 md:px-5 py-2 md:py-2.5 rounded-full font-medium transition-all duration-300 text-xs md:text-sm hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] backdrop-blur-md">
                 Espace Client
               </Link>
-              <button className="hidden sm:inline-flex items-center justify-center bg-gradient-to-r from-[#3A94F5] to-[#225CA4] text-white px-4 md:px-5 py-2 md:py-2.5 rounded-full font-semibold transition-all duration-300 text-xs md:text-sm shadow-[0_4px_15px_rgba(58,148,245,0.4)] hover:shadow-[0_8px_25px_rgba(58,148,245,0.5)] hover:-translate-y-0.5 border border-white/10">
-                Commander <ChevronRight size={16} className="ml-1" />
-              </button>
+              <Link href="/blog" className="hidden sm:inline-flex items-center justify-center bg-gradient-to-r from-[#3A94F5] to-[#225CA4] text-white px-4 md:px-5 py-2 md:py-2.5 rounded-full font-semibold transition-all duration-300 text-xs md:text-sm shadow-[0_4px_15px_rgba(58,148,245,0.4)] hover:shadow-[0_8px_25px_rgba(58,148,245,0.5)] hover:-translate-y-0.5 border border-white/10">
+                Blog <ChevronRight size={16} className="ml-1" />
+              </Link>
               
               {/* Mobile Toggle Button */}
               <button 
@@ -109,9 +112,9 @@ export default function Navbar() {
           >
             Espace Client
           </Link>
-          <button className="w-full inline-flex items-center justify-center bg-gradient-to-r from-[#3A94F5] to-[#225CA4] text-white py-4 rounded-xl font-bold text-lg shadow-lg">
-            Commander
-          </button>
+          <Link href="/blog" onClick={() => setIsOpen(false)} className="w-full inline-flex items-center justify-center bg-gradient-to-r from-[#3A94F5] to-[#225CA4] text-white py-4 rounded-xl font-bold text-lg shadow-lg">
+            Blog
+          </Link>
         </div>
       </div>
     </>
