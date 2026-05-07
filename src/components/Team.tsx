@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Linkedin, Mail } from 'lucide-react';
+import { Globe, Mail } from 'lucide-react';
 
 const teamMembers = [
   {
@@ -60,7 +60,7 @@ export default function Team() {
               
               <div className="flex gap-4 mt-auto z-10">
                 <button className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-primary hover:scale-110 transition-all shadow-lg">
-                  <Linkedin size={20} />
+                  <Globe size={20} />
                 </button>
                 <button className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white hover:bg-primary hover:scale-110 transition-all shadow-lg">
                   <Mail size={20} />
