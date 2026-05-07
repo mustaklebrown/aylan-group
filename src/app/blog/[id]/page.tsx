@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { Calendar, User, ArrowLeft, Share2, Facebook, Twitter, Link as LinkIcon } from 'lucide-react';
+import { Calendar, User, ArrowLeft, Share2, Globe, Send, Link as LinkIcon } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
@@ -141,10 +141,10 @@ export default function BlogDetailPage({ params }: { params: { id: string } }) {
                   </p>
                   <div className="flex gap-4">
                     <button className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-white hover:bg-primary transition-all border border-white/10">
-                      <Facebook size={20} />
+                      <Globe size={20} />
                     </button>
                     <button className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-white hover:bg-primary transition-all border border-white/10">
-                      <Twitter size={20} />
+                      <Send size={20} />
                     </button>
                     <button className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center text-white hover:bg-primary transition-all border border-white/10">
                       <LinkIcon size={20} />
