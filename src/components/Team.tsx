@@ -15,10 +15,10 @@ const teamMembers = [
     description: "Expert en logistique internationale, Abdallah s'assure que chaque colis arrive à destination en toute sécurité et dans les délais impartis."
   },
   {
-    name: "Karim",
-    role: "Responsable E-commerce",
-    image: "/team-2.png",
-    description: "Spécialiste des marchés mondiaux, Karim gère nos partenariats internationaux et source les meilleurs produits pour nos clients."
+    name: "Takwim",
+    role: "Responsable Marketing & Digital",
+    image: "/takwim-pro.png",
+    description: "Spécialiste du monde numérique, Takwim conçoit des stratégies marketing innovantes pour connecter Aylan Group à ses clients mondiaux."
   }
 ];
 
