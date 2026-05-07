@@ -41,15 +41,18 @@ export default function Navbar() {
           <div className="px-4 md:px-6 flex items-center justify-between">
             {/* Logo */}
             <div className="flex-shrink-0 flex items-center gap-2">
-              <Link href="/" className="flex items-center group" onClick={() => setIsOpen(false)}>
+              <Link href="/" className="flex items-center gap-3 group" onClick={() => setIsOpen(false)}>
                 <Image 
                   src="/logo.png" 
                   alt="Aylan Group Logo" 
-                  width={150} 
-                  height={50} 
-                  className="h-10 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+                  width={48} 
+                  height={48} 
+                  className="h-10 w-10 md:h-12 md:w-12 rounded-full object-cover group-hover:scale-105 transition-transform duration-300 border border-white/20 shadow-[0_0_15px_rgba(255,255,255,0.1)] bg-white/5"
                   priority
                 />
+                <span className="text-xl md:text-2xl font-extrabold text-white tracking-tight">
+                  Aylan <span className="text-gradient-gold">Group</span>
+                </span>
               </Link>
             </div>
 
