@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-outfit bg-bg-light text-text-main overflow-x-hidden antialiased;
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-[#3A94F5] to-[#73C2FD];
+  }
+  
+  .text-gradient-gold {
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-[#EED58D] to-[#D5B168];
+  }
+  
+  .glass-panel {
+    @apply bg-glass backdrop-blur-md border border-glass-border;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center px-5 py-3 md:px-7 md:py-3.5 rounded-xl font-semibold transition-all duration-300 text-sm md:text-base;
+  }
+  .btn-primary {
+    @apply bg-primary text-white shadow-[0_4px_15px_rgba(58,148,245,0.4)] hover:-translate-y-0.5 hover:shadow-[0_8px_25px_rgba(58,148,245,0.4)];
+  }
+  .btn-outline {
+    @apply border-2 border-glass-border text-white hover:bg-glass hover:border-white;
+  }
+}
