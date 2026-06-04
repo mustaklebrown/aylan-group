@@ -18,7 +18,7 @@ export default async function AdminPage() {
   });
 
   const settingsRaw = await prisma.pageSettings.findMany();
-  const settings = settingsRaw.reduce((acc: any, curr) => {
+  const settings = settingsRaw.reduce((acc: any, curr: any) => {
     try {
       acc[curr.key] = JSON.parse(curr.value);
     } catch (e) {

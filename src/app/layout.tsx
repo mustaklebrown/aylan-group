@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://aylan-group.vercel.app"),
   title: "Aylan Group | Votre Passerelle vers le Shopping Mondial",
   description: "Connectant parfaitement les acheteurs comoriens aux supermarchés mondiaux. Solutions d'approvisionnement, logistique et livraison.",
   openGraph: {

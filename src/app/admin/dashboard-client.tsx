@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { UploadButton } from "@/lib/uploadthing";
+import RichTextEditor from "@/components/RichTextEditor";
 import { 
   Newspaper, 
   GraduationCap, 
@@ -99,6 +101,8 @@ export default function AdminDashboardClient({
   const [categories, setCategories] = useState<CourseCategory[]>(initialCategories);
   const [products, setProducts] = useState<Product[]>(initialProducts);
   const [settings, setSettings] = useState<any>(initialSettings);
+  const [blogImageUrl, setBlogImageUrl] = useState<string>("");
+  const [productImageUrl, setProductImageUrl] = useState<string>("");
 
   // Status message states
   const [message, setMessage] = useState<{ text: string; type: "success" | "error" } | null>(null);
@@ -459,7 +463,10 @@ export default function AdminDashboardClient({
               <span>Gérer les articles de Blog</span>
             </h2>
             <button
-              onClick={() => setBlogModal({ open: true, editMode: false, data: null })}
+              onClick={() => {
+                setBlogModal({ open: true, editMode: false, data: null });
+                setBlogImageUrl("");
+              }}
               className="btn btn-primary px-4 py-2 text-xs md:text-sm rounded-xl flex items-center gap-2"
             >
               <Plus size={16} /> Écrire un article
@@ -492,7 +499,10 @@ export default function AdminDashboardClient({
                   </p>
                   <div className="flex gap-2 border-t border-white/5 pt-4 mt-auto">
                     <button
-                      onClick={() => setBlogModal({ open: true, editMode: true, data: blog })}
+                      onClick={() => {
+                        setBlogModal({ open: true, editMode: true, data: blog });
+                        setBlogImageUrl(blog.image);
+                      }}
                       className="flex-grow flex items-center justify-center gap-1.5 py-2 rounded-xl border border-white/10 hover:border-primary/50 text-xs font-semibold text-white/80 hover:text-primary transition-all"
                     >
                       <Edit3 size={14} /> Modifier
@@ -778,7 +788,10 @@ export default function AdminDashboardClient({
                 <span>Gérer les articles en stock</span>
               </h2>
               <button
-                onClick={() => setProductModal({ open: true, editMode: false, data: null })}
+                onClick={() => {
+                  setProductModal({ open: true, editMode: false, data: null });
+                  setProductImageUrl("");
+                }}
                 className="btn btn-primary px-4 py-2 text-xs md:text-sm rounded-xl flex items-center gap-2"
               >
                 <Plus size={16} /> Ajouter un article
@@ -813,7 +826,10 @@ export default function AdminDashboardClient({
                     </p>
                     <div className="flex gap-2 border-t border-white/5 pt-4 mt-auto">
                       <button
-                        onClick={() => setProductModal({ open: true, editMode: true, data: prod })}
+                        onClick={() => {
+                          setProductModal({ open: true, editMode: true, data: prod });
+                          setProductImageUrl(prod.image);
+                        }}
                         className="flex-grow flex items-center justify-center gap-1.5 py-2 rounded-xl border border-white/10 hover:border-primary/50 text-xs font-semibold text-white/80 hover:text-primary transition-all"
                       >
                         <Edit3 size={14} /> Modifier
@@ -895,23 +911,48 @@ export default function AdminDashboardClient({
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-primary"
                   />
                 </div>
-                <div>
-                  <label className="block text-white/80 font-bold mb-1.5">Fichier Image (Uploader)</label>
-                  <input
-                    type="file"
-                    name="imageFile"
-                    accept="image/*"
-                    className="w-full text-white/70 file:mr-4 file:py-1.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/80"
-                  />
-                </div>
                 <div className="sm:col-span-2">
-                  <label className="block text-white/80 font-bold mb-1.5">Ou URL de l'image (optionnel)</label>
-                  <input
-                    name="imageUrl"
-                    defaultValue={blogModal.editMode ? "" : blogModal.data?.image || ""}
-                    placeholder="Entrez un lien ou laissez vide si vous importez un fichier..."
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-primary"
-                  />
+                  <label className="block text-white/80 font-bold mb-2">Image de couverture (UploadThing)</label>
+                  {blogImageUrl ? (
+                    <div className="relative aspect-[21/9] w-full rounded-2xl overflow-hidden border border-white/10 group bg-white/5">
+                      <Image
+                        src={blogImageUrl}
+                        alt="Preview cover"
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <button
+                          type="button"
+                          onClick={() => setBlogImageUrl("")}
+                          className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl flex items-center gap-2 text-xs font-bold transition-all shadow-lg"
+                        >
+                          <Trash2 size={14} />
+                          Supprimer l'image
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center border-2 border-dashed border-white/10 rounded-2xl p-6 bg-white/5 hover:bg-white/10 transition-colors">
+                      <UploadButton
+                        endpoint="imageUploader"
+                        onClientUploadComplete={(res) => {
+                          if (res && res[0]) {
+                            setBlogImageUrl(res[0].url);
+                            showStatus("Image chargée avec succès !", "success");
+                          }
+                        }}
+                        onUploadError={(error: Error) => {
+                          showStatus(`Erreur de chargement: ${error.message}`, "error");
+                        }}
+                        appearance={{
+                          button: "bg-primary text-white hover:bg-primary/80 font-bold text-xs px-4 py-2.5 rounded-xl transition-all shadow-md cursor-pointer",
+                          allowedContent: "text-[10px] text-text-muted mt-2",
+                        }}
+                      />
+                    </div>
+                  )}
+                  <input type="hidden" name="imageUrl" value={blogImageUrl} />
                 </div>
                 <div className="sm:col-span-2">
                   <label className="block text-white/80 font-bold mb-1.5">Extrait (Excerpt)</label>
@@ -925,14 +966,11 @@ export default function AdminDashboardClient({
                   />
                 </div>
                 <div className="sm:col-span-2">
-                  <label className="block text-white/80 font-bold mb-1.5">Contenu détaillé (Format HTML supporté)</label>
-                  <textarea
+                  <label className="block text-white/80 font-bold mb-2">Contenu de l'article</label>
+                  <RichTextEditor
                     name="content"
-                    required
-                    rows={6}
                     defaultValue={blogModal.data?.content || ""}
-                    placeholder="Ex: <p>Texte principal...</p> <h3>Titre</h3> <p>...</p>"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-primary font-mono text-xs"
+                    required
                   />
                 </div>
               </div>
@@ -1006,23 +1044,48 @@ export default function AdminDashboardClient({
                     className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-primary"
                   />
                 </div>
-                <div>
-                  <label className="block text-white/80 font-bold mb-1.5">Fichier Image (Uploader)</label>
-                  <input
-                    type="file"
-                    name="imageFile"
-                    accept="image/*"
-                    className="w-full text-white/70 file:mr-4 file:py-1.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/80"
-                  />
-                </div>
-                <div>
-                  <label className="block text-white/80 font-bold mb-1.5">Ou URL de l'image (optionnel)</label>
-                  <input
-                    name="imageUrl"
-                    defaultValue={productModal.editMode ? "" : productModal.data?.image || ""}
-                    placeholder="Entrez un lien d'image..."
-                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-white focus:outline-none focus:border-primary"
-                  />
+                <div className="sm:col-span-2">
+                  <label className="block text-white/80 font-bold mb-2">Image du produit (UploadThing)</label>
+                  {productImageUrl ? (
+                    <div className="relative aspect-[4/3] w-full max-w-sm mx-auto rounded-2xl overflow-hidden border border-white/10 group bg-white/5">
+                      <Image
+                        src={productImageUrl}
+                        alt="Product cover preview"
+                        fill
+                        className="object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <button
+                          type="button"
+                          onClick={() => setProductImageUrl("")}
+                          className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl flex items-center gap-2 text-xs font-bold transition-all shadow-lg"
+                        >
+                          <Trash2 size={14} />
+                          Supprimer l'image
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col items-center justify-center border-2 border-dashed border-white/10 rounded-2xl p-6 bg-white/5 hover:bg-white/10 transition-colors">
+                      <UploadButton
+                        endpoint="imageUploader"
+                        onClientUploadComplete={(res) => {
+                          if (res && res[0]) {
+                            setProductImageUrl(res[0].url);
+                            showStatus("Image chargée avec succès !", "success");
+                          }
+                        }}
+                        onUploadError={(error: Error) => {
+                          showStatus(`Erreur de chargement: ${error.message}`, "error");
+                        }}
+                        appearance={{
+                          button: "bg-primary text-white hover:bg-primary/80 font-bold text-xs px-4 py-2.5 rounded-xl transition-all shadow-md cursor-pointer",
+                          allowedContent: "text-[10px] text-text-muted mt-2",
+                        }}
+                      />
+                    </div>
+                  )}
+                  <input type="hidden" name="imageUrl" value={productImageUrl} />
                 </div>
                 <div className="sm:col-span-2">
                   <label className="block text-white/80 font-bold mb-1.5">Description de l'article</label>
