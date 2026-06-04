@@ -55,7 +55,7 @@ export default async function FormationPage() {
                 <p className="text-text-muted text-lg">Aucun programme de formation n'est programmé actuellement.</p>
               </div>
             ) : (
-              courseCategories.map((cat) => (
+              courseCategories.map((cat: any) => (
                 <div key={cat.id}>
                   <div className="flex items-center gap-4 mb-10">
                     <h2 className="text-2xl md:text-3xl font-bold text-white">{cat.category}</h2>
@@ -66,7 +66,7 @@ export default async function FormationPage() {
                     <p className="text-text-muted italic text-sm">Aucun cours disponible dans cette catégorie pour le moment.</p>
                   ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                      {cat.courses.map((course) => (
+                      {cat.courses.map((course: any) => (
                         <div key={course.id} className="glass-panel p-8 rounded-3xl group hover:border-primary/50 transition-all duration-500 relative overflow-hidden">
                           {/* Background Glow Effect */}
                           <div className="absolute -top-10 -right-10 w-32 h-32 bg-primary/10 blur-[50px] rounded-full group-hover:bg-primary/20 transition-all"></div>
