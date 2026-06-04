@@ -1,0 +1,132 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id            String    @id
+  name          String
+  email         String    @unique
+  emailVerified Boolean
+  image         String?
+  createdAt     DateTime
+  updatedAt     DateTime
+  sessions      Session[]
+  accounts      Account[]
+
+  @@map("user")
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String   @unique
+  createdAt DateTime
+  updatedAt DateTime
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime
+  updatedAt             DateTime
+
+  @@map("account")
+}
+
+model Verification {
+  id         String    @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime?
+  updatedAt  DateTime?
+
+  @@map("verification")
+}
+
+// Blog Posts
+model BlogPost {
+  id        Int      @id @default(autoincrement())
+  title     String
+  excerpt   String
+  content   String   @db.Text
+  date      String   // For display, e.g. "15 Mai 2024"
+  author    String
+  category  String
+  image     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("blog_post")
+}
+
+// Formation Categories
+model CourseCategory {
+  id        Int      @id @default(autoincrement())
+  category  String   @unique
+  courses   Course[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("course_category")
+}
+
+// Formation Courses
+model Course {
+  id          Int            @id @default(autoincrement())
+  title       String
+  description String
+  iconName    String
+  duration    String
+  categoryId  Int
+  category    CourseCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  @@map("course")
+}
+
+// Espace Client Products
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String
+  price       String
+  description String
+  image       String
+  category    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("product")
+}
+
+// Page Settings (Dynamic headers, numbers, CTAs)
+model PageSettings {
+  id        Int      @id @default(autoincrement())
+  key       String   @unique
+  value     String   @db.Text // JSON string representing the settings
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("page_settings")
+}

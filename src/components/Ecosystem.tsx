@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { ShoppingBag, Truck, GraduationCap, ArrowRight } from 'lucide-react';
+import { ShoppingBag, Truck, GraduationCap, ArrowRight, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
 
 const services = [
@@ -26,6 +26,14 @@ const services = [
     description: 'Renforcez vos capacités professionnelles. Nous proposons des programmes d\'excellence en management, technologie et logistique, adaptés aux réalités économiques locales pour booster votre carrière.',
     image: '/service-courses.png',
     reverse: false
+  },
+  {
+    id: 'investissement',
+    icon: <TrendingUp className="w-6 h-6 md:w-8 md:h-8" />,
+    title: 'Opportunité d\'Investissement',
+    description: 'Développez votre activité commerciale grâce à nos solutions d\'accompagnement complètes. De la négociation et l\'achat en Chine, jusqu\'au stockage sécurisé et à la vente par nos télévendeurs dédiés.',
+    image: '/service-investment.png',
+    reverse: true
   }
 ];
 

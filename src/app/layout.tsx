@@ -39,8 +39,7 @@ export const metadata: Metadata = {
   },
 };
 
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import AppLayoutWrapper from "@/components/AppLayoutWrapper";
 
 export default function RootLayout({
   children,
@@ -50,9 +49,7 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body className="bg-bg-dark text-white antialiased">
-        <Navbar />
-        {children}
-        <Footer />
+        <AppLayoutWrapper>{children}</AppLayoutWrapper>
       </body>
     </html>
   );
