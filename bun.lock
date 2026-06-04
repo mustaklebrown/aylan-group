@@ -9,6 +9,7 @@
         "@prisma/adapter-pg": "^7.8.0",
         "@prisma/client": "^7.8.0",
         "better-auth": "^1.6.14",
+        "kysely": "^0.28.5",
         "lucide-react": "^1.8.0",
         "next": "16.2.4",
         "pg": "^8.21.0",
@@ -25,7 +26,6 @@
         "dotenv": "^17.4.2",
         "eslint": "^9",
         "eslint-config-next": "16.2.4",
-        "kysely": "0.28.1",
         "postcss": "^8.5.10",
         "prisma": "^7.0.0",
         "tailwindcss": "^3.4.19",
@@ -746,7 +746,7 @@
 
     "keyv": ["keyv@4.5.4", "", { "dependencies": { "json-buffer": "3.0.1" } }, "sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw=="],
 
-    "kysely": ["kysely@0.28.1", "", {}, "sha512-umkhsHB0y2JvI83DUtuYYTfvr063xTHTcr/k1z0E2Bg39zGiBcdDvlbP79YMcItn55pKQtD120sZmKa9jhCVtw=="],
+    "kysely": ["kysely@0.28.17", "", {}, "sha512-nbD8lB9EB3wNdMhOCdx5Li8DxnLbvKByylRLcJ1h+4SkrowVeECAyZlyiKMThF7xFdRz0jSQ2MoJr+wXux2y0Q=="],
 
     "language-subtag-registry": ["language-subtag-registry@0.3.23", "", {}, "sha512-0K65Lea881pHotoGEa5gDlMxt3pctLi2RplBb7Ezh4rRdLEOtgi7n4EwK9lamnUCkKBqaeKRVebTq6BAxSkpXQ=="],
 
