@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { UploadButton } from "@/lib/uploadthing";
+import { authClient } from "@/lib/auth-client";
 import RichTextEditor from "@/components/RichTextEditor";
 import { 
   Newspaper, 
@@ -93,8 +94,8 @@ export default function AdminDashboardClient({
   initialProducts,
   initialSettings
 }: DashboardClientProps) {
-  // Navigation tabs: 'blogs' | 'formation' | 'products'
-  const [activeTab, setActiveTab] = useState<'blogs' | 'formation' | 'products'>('blogs');
+  // Navigation tabs: 'blogs' | 'formation' | 'products' | 'settings'
+  const [activeTab, setActiveTab] = useState<'blogs' | 'formation' | 'products' | 'settings'>('blogs');
 
   // Dynamic lists from state
   const [blogs, setBlogs] = useState<BlogPost[]>(initialBlogs);
@@ -448,6 +449,18 @@ export default function AdminDashboardClient({
           >
             <ShoppingBag size={16} />
             <span>Espace Client</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab('settings')}
+            className={`flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-xs md:text-sm transition-all ${
+              activeTab === 'settings' 
+                ? "bg-primary text-white shadow-lg" 
+                : "text-white/60 hover:text-white"
+            }`}
+          >
+            <Users size={16} />
+            <span>Paramètres</span>
           </button>
         </div>
       </div>
@@ -1200,6 +1213,103 @@ export default function AdminDashboardClient({
                   className="btn btn-primary px-6 py-2.5 text-sm rounded-xl"
                 >
                   {actionLoading ? "Enregistrement..." : "Enregistrer"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* =========================================================================
+          TAB 4: PARAMETRES ADMIN
+          ========================================================================= */}
+      {activeTab === 'settings' && (
+        <div className="space-y-12">
+          <div className="glass-panel p-8 rounded-3xl border border-white/10 relative overflow-hidden">
+            <h3 className="text-lg font-bold text-white mb-6 flex items-center gap-2 border-b border-white/5 pb-4">
+              <Users size={18} className="text-accent" />
+              <span>Paramètres du Compte Administrateur</span>
+            </h3>
+            <form onSubmit={async (e) => {
+              e.preventDefault();
+              setActionLoading(true);
+              const form = e.currentTarget;
+              const formData = new FormData(form);
+              const name = formData.get("name") as string;
+              const password = formData.get("password") as string;
+              const currentPassword = formData.get("currentPassword") as string;
+
+              try {
+                if (name) {
+                  const { error } = await authClient.updateUser({ name });
+                  if (error) throw new Error(error.message);
+                }
+                
+                if (password) {
+                  if (!currentPassword) {
+                    throw new Error("Veuillez renseigner votre mot de passe actuel pour le modifier.");
+                  }
+                  const { error } = await authClient.changePassword({ 
+                    newPassword: password, 
+                    currentPassword, 
+                    revokeOtherSessions: true 
+                  });
+                  if (error) throw new Error(error.message);
+                }
+                
+                showStatus("Profil mis à jour avec succès !", "success");
+                if (password) {
+                  form.reset();
+                }
+              } catch (error: any) {
+                showStatus(error.message || "Impossible de mettre à jour le profil.", "error");
+              } finally {
+                setActionLoading(false);
+              }
+            }} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-white/70 text-xs font-bold mb-2">Nom de l'Administrateur</label>
+                <input
+                  name="name"
+                  placeholder="Nouveau nom complet"
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-primary"
+                />
+              </div>
+              <div>
+                <label className="block text-white/70 text-xs font-bold mb-2">Adresse Email</label>
+                <input
+                  name="email"
+                  type="email"
+                  placeholder="admin@aylan-group.com"
+                  readOnly
+                  className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white/50 text-sm focus:outline-none cursor-not-allowed"
+                  title="L'email ne peut pas être modifié ici pour des raisons de sécurité."
+                />
+              </div>
+              <div className="md:col-span-2 p-6 bg-white/5 border border-white/10 rounded-2xl space-y-4">
+                <h4 className="text-white font-bold text-sm">Changer le mot de passe</h4>
+                <div>
+                  <label className="block text-white/70 text-xs font-bold mb-2">Nouveau Mot de passe (Optionnel)</label>
+                  <input
+                    name="password"
+                    type="password"
+                    placeholder="Laisser vide pour ne pas modifier"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-primary"
+                  />
+                </div>
+                <div>
+                  <label className="block text-white/70 text-xs font-bold mb-2">Mot de passe actuel (Requis si modification)</label>
+                  <input
+                    name="currentPassword"
+                    type="password"
+                    placeholder="Obligatoire pour confirmer"
+                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-primary"
+                  />
+                </div>
+              </div>
+              <div className="md:col-span-2 flex justify-end">
+                <button type="submit" disabled={actionLoading} className="btn btn-primary px-6 py-2.5 text-sm rounded-xl flex items-center gap-2">
+                  <Save size={16} /> {actionLoading ? "Enregistrement..." : "Mettre à jour le profil"}
                 </button>
               </div>
             </form>
