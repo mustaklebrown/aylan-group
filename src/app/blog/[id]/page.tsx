@@ -136,7 +136,7 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ id:
               <div className="glass-panel p-8 rounded-3xl border border-white/10">
                 <h4 className="text-xl font-bold text-white mb-6">Articles Récents</h4>
                 <div className="space-y-6">
-                  {relatedPosts.map(p => (
+                  {relatedPosts.map((p: any) => (
                     <Link key={p.id} href={`/blog/${p.id}`} className="flex gap-4 group">
                       <div className="relative w-20 h-20 shrink-0 rounded-xl overflow-hidden border border-white/10">
                         <Image src={p.image} alt={p.title} fill className="object-cover group-hover:scale-110 transition-transform duration-500" />
