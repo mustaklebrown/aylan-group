@@ -29,7 +29,7 @@ export default async function BlogPage() {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {blogs.map((post) => (
+              {blogs.map((post: any) => (
                 <article
                   key={post.id}
                   className="glass-panel rounded-[2.5rem] overflow-hidden border border-white/10 group hover:border-primary/50 transition-all duration-500 flex flex-col h-full"
