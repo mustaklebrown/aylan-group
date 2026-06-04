@@ -9,16 +9,22 @@ const teamMembers = [
     description: "Visionnaire et leader, Bousri pilote la stratégie de croissance d'Aylan Group avec une passion pour l'innovation aux Comores."
   },
   {
-    name: "Abdallah",
-    role: "Directeur des Opérations",
-    image: "/abdallah-pro.png",
-    description: "Expert en logistique internationale, Abdallah s'assure que chaque colis arrive à destination en toute sécurité et dans les délais impartis."
+    name: "Hadidja",
+    role: "Cheffe des équipes",
+    image: "/hadidja.jpg",
+    description: "Coordonnatrice dynamique, Hadidja supervise et anime les équipes d'Aylan Group au quotidien pour assurer une synergie et une efficacité optimales."
   },
   {
     name: "Takwim",
     role: "Responsable Marketing & Digital",
     image: "/takwim-pro.png",
     description: "Spécialiste du monde numérique, Takwim conçoit des stratégies marketing innovantes pour connecter Aylan Group à ses clients mondiaux."
+  },
+  {
+    name: "Rayna",
+    role: "Comptable du groupe",
+    image: "/comptable.jpg",
+    description: "Garante de la rigueur financière d'Aylan Group, Rayna gère la comptabilité, la facturation et le suivi budgétaire du groupe avec précision."
   }
 ];
 
@@ -35,7 +41,7 @@ export default function Team() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {teamMembers.map((member, index) => (
             <div key={index} className="glass-panel p-8 md:p-10 rounded-[3rem] border border-white/10 group hover:-translate-y-3 transition-all duration-500 hover:border-primary/50 text-center flex flex-col items-center shadow-2xl relative overflow-hidden">
               
