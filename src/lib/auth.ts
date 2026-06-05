@@ -12,10 +12,9 @@ export const auth = betterAuth({
   secret: process.env.BETTER_AUTH_SECRET,
   baseURL:
     process.env.BETTER_AUTH_URL ||
-    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 
     (process.env.NODE_ENV === 'production'
       ? 'https://aylan-group.vercel.app'
-      : 'http://localhost:3000')),
-  trustedOrigins: process.env.VERCEL_URL ? [`https://${process.env.VERCEL_URL}`, 'https://aylan-group.vercel.app'] : ['https://aylan-group.vercel.app'],
+      : 'http://localhost:3000'),
+  trustedOrigins: ['https://aylan-group.vercel.app'],
 });
 export type Auth = typeof auth;
