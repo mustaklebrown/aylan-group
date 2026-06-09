@@ -1,11 +1,7 @@
+import { TRUST_BENEFITS } from '@/constants';
 import { CheckCircle2 } from 'lucide-react';
 
 export default function Trust() {
-  const benefits = [
-    { title: 'Logistique Fiable', desc: 'Livraison sécurisée et ponctuelle à travers les îles des Comores.' },
-    { title: 'Partenaires Mondiaux', desc: 'Collaboration avec les plus grands marchés mondiaux.' },
-    { title: 'Processus Transparent', desc: 'Suivi en temps réel et communication claire garantie.' }
-  ];
 
   return (
     <section className="py-16 md:py-24 bg-white border-t border-gray-100">
@@ -19,7 +15,7 @@ export default function Trust() {
             </p>
             
             <div className="flex flex-col gap-6 md:gap-8">
-              {benefits.map((b, i) => (
+              {TRUST_BENEFITS.map((b, i) => (
                 <div key={i} className="flex gap-4 md:gap-5 items-start">
                   <CheckCircle2 className="text-primary flex-shrink-0 mt-0.5" size={24} />
                   <div>

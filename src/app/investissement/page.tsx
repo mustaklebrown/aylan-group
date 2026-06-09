@@ -1,95 +1,13 @@
 import React from 'react';
 import PageHeader from '@/components/PageHeader';
 import { 
-  Globe, 
-  Warehouse, 
-  Headphones, 
-  Clock, 
-  Shield, 
-  Briefcase, 
-  TrendingUp, 
   ArrowRight,
   CheckCircle2
 } from 'lucide-react';
 import Link from 'next/link';
+import { INVESTMENT_SERVICES, INVESTMENT_ADVANTAGES, INVESTMENT_STEPS } from '@/constants';
 
 export default function InvestissementPage() {
-  const services = [
-    {
-      title: "Achat en Chine",
-      description: "Nous aidons les investisseurs à trouver et acheter des produits auprès de fournisseurs fiables en Chine.",
-      details: "Assistance dans la négociation, le contrôle qualité et l'expédition.",
-      icon: <Globe className="text-primary w-8 h-8" />,
-    },
-    {
-      title: "Stockage de marchandises",
-      description: "Nous proposons un service de stockage sécurisé pour les marchandises importées.",
-      details: "Gestion des stocks et préparation des commandes.",
-      icon: <Warehouse className="text-accent w-8 h-8" />,
-    },
-    {
-      title: "Télévendeurs dédiés",
-      description: "Nous mettons à disposition des télévendeurs expérimentés pour promouvoir et vendre les produits des investisseurs.",
-      details: "Gestion des appels, suivi des prospects et augmentation des ventes.",
-      icon: <Headphones className="text-primary w-8 h-8" />,
-    }
-  ];
-
-  const advantages = [
-    {
-      title: "Gain de temps",
-      description: "Nous gérons toute la logistique complexe pour vous permettre de vous concentrer sur la croissance.",
-      icon: <Clock className="text-primary" />
-    },
-    {
-      title: "Réduction des risques",
-      description: "Sourcing sécurisé auprès de fournisseurs vérifiés et contrôle de qualité rigoureux sur place.",
-      icon: <Shield className="text-accent" />
-    },
-    {
-      title: "Accompagnement complet",
-      description: "De la négociation de départ en Chine jusqu'à la livraison finale de vos clients aux Comores.",
-      icon: <Briefcase className="text-primary" />
-    },
-    {
-      title: "Augmentation des ventes",
-      description: "Force de vente active avec nos télévendeurs expérimentés pour convertir un maximum de prospects.",
-      icon: <TrendingUp className="text-accent" />
-    }
-  ];
-
-  const steps = [
-    {
-      number: "01",
-      title: "Choix des produits",
-      description: "Sélection des produits porteurs à forte demande à importer."
-    },
-    {
-      number: "02",
-      title: "Achat & Négociation",
-      description: "Achat sécurisé auprès des meilleurs fournisseurs en Chine."
-    },
-    {
-      number: "03",
-      title: "Transport & Logistique",
-      description: "Expédition, transit et réception sécurisée des marchandises."
-    },
-    {
-      number: "04",
-      title: "Stockage sécurisé",
-      description: "Réception et entreposage optimal dans nos locaux sécurisés."
-    },
-    {
-      number: "05",
-      title: "Promotion & Télévente",
-      description: "Vente et marketing actif par notre équipe commerciale dédiée."
-    },
-    {
-      number: "06",
-      title: "Livraison & Suivi",
-      description: "Livraison rapide aux clients finaux et rapports de performance."
-    }
-  ];
 
   return (
     <main className="bg-bg-dark min-h-screen text-white overflow-hidden">
@@ -112,7 +30,7 @@ export default function InvestissementPage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
+            {INVESTMENT_SERVICES.map((service, index) => (
               <div key={index} className="glass-panel p-8 rounded-3xl border border-white/5 hover:border-primary/30 hover:shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-500 group relative overflow-hidden flex flex-col justify-between">
                 {/* Glow effect on hover */}
                 <div className="absolute -top-10 -right-10 w-32 h-32 bg-primary/10 blur-[50px] rounded-full group-hover:bg-primary/20 transition-all"></div>
@@ -142,7 +60,7 @@ export default function InvestissementPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {advantages.map((adv, index) => (
+            {INVESTMENT_ADVANTAGES.map((adv, index) => (
               <div key={index} className="glass-panel p-6 rounded-2xl border border-white/5 hover:border-accent/30 transition-all duration-300">
                 <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center mb-6 border border-white/10 text-primary">
                   {adv.icon}
@@ -164,7 +82,7 @@ export default function InvestissementPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative">
-            {steps.map((step, index) => (
+            {INVESTMENT_STEPS.map((step, index) => (
               <div key={index} className="glass-panel p-8 rounded-3xl border border-white/5 hover:border-primary/20 transition-all duration-300 relative group flex flex-col justify-between">
                 <div>
                   <div className="flex items-center justify-between mb-6">

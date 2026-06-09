@@ -1,6 +1,7 @@
 import React from 'react';
 import PageHeader from '@/components/PageHeader';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { CONTACT_INFO } from '@/constants';
 
 export default function ContactPage() {
   return (
@@ -23,7 +24,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-xs text-text-muted uppercase font-bold tracking-widest">Téléphone</p>
-                    <p className="text-lg font-bold text-white">+269 334 00 00</p>
+                    <p className="text-lg font-bold text-white">{CONTACT_INFO.phone}</p>
                   </div>
                 </div>
                 
@@ -33,7 +34,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-xs text-text-muted uppercase font-bold tracking-widest">Email</p>
-                    <p className="text-lg font-bold text-white">contact@aylan-group.com</p>
+                    <p className="text-lg font-bold text-white">{CONTACT_INFO.email}</p>
                   </div>
                 </div>
                 
@@ -43,7 +44,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="text-xs text-text-muted uppercase font-bold tracking-widest">Adresse</p>
-                    <p className="text-lg font-bold text-white">Moroni, Grande Comore</p>
+                    <p className="text-lg font-bold text-white">{CONTACT_INFO.address}</p>
                   </div>
                 </div>
               </div>
@@ -102,7 +103,7 @@ export default function ContactPage() {
         <div className="container mx-auto px-4 md:px-8">
           <div className="glass-panel p-4 rounded-[2.5rem] border border-white/10 h-[400px] relative overflow-hidden">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31065.34441052601!2d43.2500!3d-11.7100!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x18903bc398703a11%3A0x6336186a51d38260!2sMoroni%2C%20Comores!5e0!3m2!1sfr!2s!4v1715070000000!5m2!1sfr!2s" 
+              src={CONTACT_INFO.mapEmbedUrl} 
               width="100%" 
               height="100%" 
               style={{ border: 0 }} 

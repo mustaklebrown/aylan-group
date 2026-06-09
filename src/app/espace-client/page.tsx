@@ -3,6 +3,7 @@ import PageHeader from '@/components/PageHeader';
 import Image from 'next/image';
 import { Phone, ShoppingCart } from 'lucide-react';
 import { prisma } from '@/lib/prisma';
+import { ESPACE_CLIENT_DEFAULTS } from '@/constants';
 
 export const dynamic = "force-dynamic";
 
@@ -19,15 +20,7 @@ export default async function EspaceClientPage() {
     where: { key: 'espace_client_settings' },
   });
 
-  const settings = settingsRaw ? JSON.parse(settingsRaw.value) : {
-    heroTitle: "Nos Articles",
-    heroGradientTitle: "Aylan Group",
-    heroSubtitle: "Découvrez notre sélection de produits premium disponibles en stock. Cliquez sur un article pour commander directement par téléphone.",
-    phoneNumber: "+2693340000",
-    phoneLabel: "+269 334 00 00",
-    ctaTitle: "Besoin d'aide pour votre commande ?",
-    ctaDescription: "Nos conseillers sont disponibles du lundi au samedi pour vous accompagner dans vos achats.",
-  };
+  const settings = settingsRaw ? JSON.parse(settingsRaw.value) : ESPACE_CLIENT_DEFAULTS;
 
   return (
     <main className="bg-bg-dark min-h-screen font-outfit">

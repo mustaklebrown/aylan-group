@@ -1,25 +1,9 @@
 import React from 'react';
 import PageHeader from '@/components/PageHeader';
-import { ShoppingCart, Globe, Zap, CheckCircle2 } from 'lucide-react';
+import { ShoppingCart } from 'lucide-react';
+import { ECOMMERCE_FEATURES, ECOMMERCE_STEPS } from '@/constants';
 
 export default function EcommercePage() {
-  const features = [
-    {
-      title: "Multi-Plateforme",
-      description: "Achetez sur Amazon, Shein, Temu et AliExpress depuis une interface unique.",
-      icon: <Globe className="text-primary" />
-    },
-    {
-      title: "Paiement Local",
-      description: "Payez vos achats internationaux avec vos moyens de paiement habituels aux Comores.",
-      icon: <CheckCircle2 className="text-accent" />
-    },
-    {
-      title: "Suivi en Temps Réel",
-      description: "Suivez votre commande de l'entrepôt jusqu'à la livraison finale.",
-      icon: <Zap className="text-primary" />
-    }
-  ];
 
   return (
     <main>
@@ -38,12 +22,7 @@ export default function EcommercePage() {
               </div>
               <h2 className="text-3xl font-bold text-white mb-6">Comment ça marche ?</h2>
               <ul className="space-y-6">
-                {[
-                  "Choisissez vos produits sur n'importe quel site mondial.",
-                  "Envoyez-nous les liens ou utilisez notre plateforme.",
-                  "Nous validons le prix total incluant la livraison.",
-                  "Vous payez localement, nous nous occupons du reste."
-                ].map((item, i) => (
+                {ECOMMERCE_STEPS.map((item, i) => (
                   <li key={i} className="flex items-start gap-4 text-text-muted">
                     <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-primary text-xs font-bold mt-1">
                       {i + 1}
@@ -55,7 +34,7 @@ export default function EcommercePage() {
             </div>
             
             <div className="grid grid-cols-1 gap-6">
-              {features.map((feature, i) => (
+              {ECOMMERCE_FEATURES.map((feature, i) => (
                 <div key={i} className="glass-panel p-6 rounded-2xl flex items-center gap-6 border border-white/5 hover:border-accent/30 transition-colors">
                   <div className="w-12 h-12 bg-white/5 rounded-xl flex items-center justify-center border border-white/10">
                     {feature.icon}

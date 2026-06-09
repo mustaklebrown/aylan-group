@@ -5,13 +5,7 @@ import Image from 'next/image';
 import { Menu, X, ChevronRight } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
-const navLinks = [
-  { name: 'Formation', href: '/formation' },
-  { name: 'Livraison', href: '/livraison' },
-  { name: 'E-commerce', href: '/e-commerce' },
-  { name: 'Investissement', href: '/investissement' },
-  { name: 'Contact', href: '/contact' }
-];
+import { NAV_LINKS } from '@/constants';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -59,7 +53,7 @@ export default function Navbar() {
 
             {/* Desktop Links */}
             <div className="hidden lg:flex items-center gap-1 bg-white/5 p-1.5 rounded-full border border-white/10 shadow-inner">
-              {navLinks.map((item) => (
+              {NAV_LINKS.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
@@ -96,7 +90,7 @@ export default function Navbar() {
         className={`fixed inset-0 z-40 bg-[#001A3B]/95 backdrop-blur-xl lg:hidden flex flex-col pt-28 px-6 pb-8 transition-all duration-500 ease-in-out ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'}`}
       >
         <div className="flex flex-col gap-6 flex-grow overflow-y-auto">
-          {navLinks.map((item) => (
+          {NAV_LINKS.map((item) => (
             <Link
               key={item.name}
               href={item.href}
