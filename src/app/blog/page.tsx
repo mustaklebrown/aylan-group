@@ -3,6 +3,16 @@ import Image from 'next/image';
 import { Calendar, User, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import { prisma } from '@/lib/prisma';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Actualités, Guides & Conseils E-commerce et Logistique | Blog Aylan Group",
+  description: "Retrouvez nos derniers articles, tutoriels et conseils pratiques pour importer, vendre et développer votre commerce aux Comores.",
+  keywords: ["blog e-commerce Comores", "conseils logistique Comores", "actualités commerce Moroni", "guide import Comores"],
+  alternates: {
+    canonical: "/blog",
+  },
+};
 
 export const dynamic = "force-dynamic";
 

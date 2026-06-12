@@ -4,8 +4,62 @@ import { Calendar, User, ArrowLeft, Share2, Globe, Send, Link as LinkIcon } from
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { prisma } from '@/lib/prisma';
+import type { Metadata } from 'next';
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata({ 
+  params 
+}: { 
+  params: Promise<{ id: string }> 
+}): Promise<Metadata> {
+  const { id } = await params;
+  
+  let blogId: number;
+  try {
+    blogId = parseInt(id);
+  } catch (e) {
+    return {};
+  }
+
+  const post = await prisma.blogPost.findUnique({
+    where: { id: blogId },
+  });
+
+  if (!post) {
+    return {
+      title: "Article non trouvé | Blog Aylan Group",
+    };
+  }
+
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://aylan-group.vercel.app";
+
+  return {
+    title: `${post.title} | Blog Aylan Group`,
+    description: post.excerpt,
+    alternates: {
+      canonical: `/blog/${post.id}`,
+    },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      type: "article",
+      url: `${baseUrl}/blog/${post.id}`,
+      images: [
+        {
+          url: post.image,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: [post.image],
+    },
+  };
+}
 
 export default async function BlogDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -37,8 +91,34 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ id:
     },
   });
 
+  const blogJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.excerpt,
+    "image": post.image,
+    "datePublished": post.createdAt.toISOString(),
+    "dateModified": post.updatedAt.toISOString(),
+    "author": {
+      "@type": "Person",
+      "name": post.author
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Aylan Group",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://aylan-group.vercel.app/logo.png"
+      }
+    }
+  };
+
   return (
     <main className="bg-bg-dark min-h-screen pt-32 pb-20 font-outfit">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogJsonLd) }}
+      />
       <div className="container mx-auto px-4 md:px-8">
         {/* Back Button */}
         <Link 

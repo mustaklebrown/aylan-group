@@ -2,10 +2,43 @@ import React from 'react';
 import PageHeader from '@/components/PageHeader';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { CONTACT_INFO } from '@/constants';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Contactez Aylan Group | Service Client & Devis aux Comores",
+  description: "Une question ? Besoin d'un devis pour un transport de fret ou un achat groupé ? Contactez notre équipe aux Comores par téléphone, email ou via notre formulaire.",
+  keywords: ["contact Aylan Group", "téléphone Aylan Group", "adresse Aylan Group Moroni", "devis logistique Comores"],
+  alternates: {
+    canonical: "/contact",
+  },
+};
+
+const contactJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": "Contactez Aylan Group",
+  "description": "Nous sommes là pour répondre à toutes vos questions et vous accompagner dans vos projets aux Comores.",
+  "url": "https://aylan-group.vercel.app/contact",
+  "mainEntity": {
+    "@type": "Organization",
+    "name": "Aylan Group",
+    "telephone": "+269 334 00 00",
+    "email": "contact@aylan-group.com",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Moroni",
+      "addressCountry": "KM"
+    }
+  }
+};
 
 export default function ContactPage() {
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactJsonLd) }}
+      />
       <PageHeader 
         title="Contactez" 
         gradientTitle="Aylan Group"

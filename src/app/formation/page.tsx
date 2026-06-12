@@ -3,6 +3,16 @@ import PageHeader from '@/components/PageHeader';
 import * as Icons from 'lucide-react';
 import { prisma } from '@/lib/prisma';
 import { FORMATION_DEFAULTS } from '@/constants';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Formations Professionnelles E-commerce & Logistique | Aylan Group",
+  description: "Développez vos compétences avec nos formations spécialisées en commerce international, marketing digital, e-commerce et gestion logistique aux Comores.",
+  keywords: ["formation e-commerce Comores", "formation marketing digital Moroni", "apprendre e-commerce", "cours logistique Comores", "Aylan Group formation"],
+  alternates: {
+    canonical: "/formation",
+  },
+};
 
 export const dynamic = "force-dynamic";
 
@@ -33,8 +43,28 @@ export default async function FormationPage() {
 
   const settings = settingsRaw ? JSON.parse(settingsRaw.value) : FORMATION_DEFAULTS;
 
+  // Générer les données structurées dynamiques pour les formations
+  const coursesJsonLd = courseCategories.flatMap((cat: any) => 
+    cat.courses.map((course: any) => ({
+      "@context": "https://schema.org",
+      "@type": "Course",
+      "name": course.title,
+      "description": course.description,
+      "provider": {
+        "@type": "Organization",
+        "name": "Aylan Group",
+        "sameAs": "https://aylan-group.vercel.app"
+      },
+      "educationalCredentialAwarded": "Certificat de formation Aylan Group"
+    }))
+  );
+
   return (
     <main className="bg-bg-dark min-h-screen font-outfit">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(coursesJsonLd) }}
+      />
       <PageHeader 
         title={settings.heroTitle} 
         gradientTitle={settings.heroGradientTitle}

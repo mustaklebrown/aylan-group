@@ -1,11 +1,36 @@
 import React from 'react';
 import PageHeader from '@/components/PageHeader';
 import { LIVRAISON_STEPS } from '@/constants';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Service de Livraison & Logistique Internationale vers les Comores | Aylan Group",
+  description: "Profitez d'un service de livraison et logistique fiable de la France, de la Chine et de la Turquie vers les Comores. Transport sécurisé de vos marchandises et colis.",
+  keywords: ["livraison Comores", "logistique Comores", "fret aérien Comores", "fret maritime Comores", "transport colis Moroni"],
+  alternates: {
+    canonical: "/livraison",
+  },
+};
+
+const serviceJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Service de Livraison & Logistique Internationale",
+  "provider": {
+    "@type": "Organization",
+    "name": "Aylan Group"
+  },
+  "description": "Une logistique simplifiée de l'international jusqu'à votre porte aux Comores.",
+  "areaServed": "KM"
+};
 
 export default function LivraisonPage() {
-
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
       <PageHeader 
         title="Service de" 
         gradientTitle="Livraison"

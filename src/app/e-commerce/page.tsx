@@ -2,11 +2,36 @@ import React from 'react';
 import PageHeader from '@/components/PageHeader';
 import { ShoppingCart } from 'lucide-react';
 import { ECOMMERCE_FEATURES, ECOMMERCE_STEPS } from '@/constants';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Solutions E-Commerce & Approvisionnement aux Comores | Aylan Group",
+  description: "Achetez sur les plus grands sites e-commerce mondiaux (Amazon, Cdiscount, AliExpress, etc.) et faites-vous livrer directement aux Comores avec Aylan Group.",
+  keywords: ["e-commerce Comores", "achat en ligne Moroni", "approvisionnement Comores", "importation Comores", "Amazon Comores"],
+  alternates: {
+    canonical: "/e-commerce",
+  },
+};
+
+const serviceJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Solutions E-commerce & Approvisionnement",
+  "provider": {
+    "@type": "Organization",
+    "name": "Aylan Group"
+  },
+  "description": "Accédez aux plus grands supermarchés du monde sans quitter les Comores. Achetez en ligne et faites-vous livrer en toute sécurité.",
+  "areaServed": "KM"
+};
 
 export default function EcommercePage() {
-
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
       <PageHeader 
         title="Solutions" 
         gradientTitle="E-commerce"

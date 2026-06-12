@@ -3,8 +3,17 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { LayoutDashboard, Globe, ShieldAlert } from "lucide-react";
+import { LayoutDashboard, Globe } from "lucide-react";
 import AdminLogoutButton from "./logout-button";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Console Admin | Aylan Group",
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default async function AdminLayout({
   children,

@@ -4,6 +4,16 @@ import Image from 'next/image';
 import { Phone, ShoppingCart } from 'lucide-react';
 import { prisma } from '@/lib/prisma';
 import { ESPACE_CLIENT_DEFAULTS } from '@/constants';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Espace Client & Produits Disponibles aux Comores | Aylan Group",
+  description: "Consultez notre catalogue de produits importés et disponibles immédiatement à Moroni, Comores. Commandez en direct par téléphone.",
+  keywords: ["produits Comores", "acheter téléphone Moroni", "importation directe Comores", "boutique Aylan Group", "catalogue Aylan Group"],
+  alternates: {
+    canonical: "/espace-client",
+  },
+};
 
 export const dynamic = "force-dynamic";
 
@@ -22,9 +32,45 @@ export default async function EspaceClientPage() {
 
   const settings = settingsRaw ? JSON.parse(settingsRaw.value) : ESPACE_CLIENT_DEFAULTS;
 
+  // Générer les données structurées dynamiques pour le catalogue
+  const collectionJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Catalogue de Produits Disponibles - Aylan Group",
+    "description": "Consultez et achetez nos produits importés disponibles immédiatement à Moroni, Comores.",
+    "url": "https://aylan-group.vercel.app/espace-client",
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": products.map((product: any, idx: number) => {
+        const priceClean = parseFloat(product.price.replace(/[^0-9]/g, '')) || 0;
+        return {
+          "@type": "ListItem",
+          "position": idx + 1,
+          "item": {
+            "@type": "Product",
+            "name": product.name,
+            "description": product.description,
+            "image": product.image,
+            "offers": {
+              "@type": "Offer",
+              "price": priceClean > 0 ? priceClean : undefined,
+              "priceCurrency": "KMF",
+              "availability": "https://schema.org/InStock"
+            }
+          }
+        };
+      })
+    }
+  };
+
   return (
     <main className="bg-bg-dark min-h-screen font-outfit">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionJsonLd) }}
+      />
       <PageHeader 
+
         title={settings.heroTitle} 
         gradientTitle={settings.heroGradientTitle}
         subtitle={settings.heroSubtitle}

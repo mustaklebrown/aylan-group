@@ -6,11 +6,36 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { INVESTMENT_SERVICES, INVESTMENT_ADVANTAGES, INVESTMENT_STEPS } from '@/constants';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Investissement & Accompagnement Commercial aux Comores | Aylan Group",
+  description: "Investissez en toute sécurité et développez votre activité commerciale aux Comores. Nous vous accompagnons de l'achat des produits à l'importation et la vente.",
+  keywords: ["investissement Comores", "commerce Comores", "importer aux Comores", "créer commerce Moroni", "opportunités affaires Comores"],
+  alternates: {
+    canonical: "/investissement",
+  },
+};
+
+const serviceJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Investissement & Accompagnement Commercial",
+  "provider": {
+    "@type": "Organization",
+    "name": "Aylan Group"
+  },
+  "description": "Nous accompagnons les investisseurs et commerçants dans toutes les étapes de leur activité, de l'achat des produits jusqu'à leur vente aux Comores.",
+  "areaServed": "KM"
+};
 
 export default function InvestissementPage() {
-
   return (
     <main className="bg-bg-dark min-h-screen text-white overflow-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
+      />
       {/* Introduction Section */}
       <PageHeader 
         title="Investissez avec nous et" 
